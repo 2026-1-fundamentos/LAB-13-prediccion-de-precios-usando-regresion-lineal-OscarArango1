@@ -1,0 +1,2 @@
+{"type": "metrics", "dataset": "train", "r2": 0.895, "mse": 2.419, "mad": 1.097}
+{"type": "metrics", "dataset": "test", "r2": 0.76, "mse": 7.657, "mad": 1.542}

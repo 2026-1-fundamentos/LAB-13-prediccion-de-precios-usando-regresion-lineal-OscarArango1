@@ -61,3 +61,21 @@
 # {'type': 'metrics', 'dataset': 'train', 'r2': 0.8, 'mse': 0.7, 'mad': 0.9}
 # {'type': 'metrics', 'dataset': 'test', 'r2': 0.7, 'mse': 0.6, 'mad': 0.8}
 #
+from sklearn.preprocessing import FunctionTransformer
+from sklearn.base import BaseEstimator, TransformerMixin
+
+
+class _normalize_cols(BaseEstimator, TransformerMixin):
+    """Transformer que normaliza nombres de columnas."""
+    
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        X = X.copy()
+        if 'Present_Price' not in X.columns and 'Selling_Price' in X.columns:
+            X = X.rename(columns={'Selling_Price': 'Present_Price'})
+        return X
+
+
+normalize_transformer = FunctionTransformer(_normalize_cols().transform)
